@@ -13,8 +13,34 @@ Cheatsheet for AWS Elastic Beanstalk Rails 6 Setup </br>
   
 Deploying a rails app to AWS can be tricky, especially if this is your first time. 
 </br>
-To start, you are going to need to ensure that your local ruby version is up to date with the most current version of the platform that AWS offers on the Elastic Beanstalk console. 
+To start, you are going to need to ensure that you have a User created in the IAM manager of your AWS account and it has the proper permissions setup. 
 </br>
+Go ahead and create an AWS account if you have not already.
+</br>
+Click on the Services Navigation tab at the top and search for IAM. Select this Service
+</br>
+Once on the IAM manager page, select Users.
+</br>
+Click the 'Add Users' button in the top right hand corner
+</br>
+type in your name where it asks for a Username
+<br>
+check the box that says "Access key - Programmatic access"
+</br>
+This will create an access key ID and a Secret Access key for you to use to login to AWS using your local machine
+<br/>
+On the Next Page, it will ask you to add tags.
+<br/>
+Go ahead and add a tag so you can recognize it later, Name:your-username
+</br>
+Click Download .csv
+</br>
+Save this csv file.
+</br>
+You will need these credentials to setup your cli to access your AWS account in order to create your Elastic Beanstalk application
+</br>
+
+Check the local ruby version and the ruby version you used to setup your rails application.
 This is an important step that can be easy to mess up, so follow closely.
 </br>
   In the root of your app directory, run: 
