@@ -2,7 +2,7 @@
 Cheatsheet for AWS Elastic Beanstalk Rails 6 Setup
 - This Guide Presumes that you already have ample knowledge of the basics of working in rails, postgres, git and terminal commands
 
-#Deploy Rails 6 Application to Elastic Beanstalk With RDS PostgresQL Database
+# Deploy Rails 6 Application to Elastic Beanstalk With RDS PostgresQL Database
   1) Set Up AWS Account, User & AWS cli
   2) Create RDS Database and Configure settings for inbound & outbound traffic
   3) Create Elastic Beanstalk Environment 
@@ -12,7 +12,7 @@ Cheatsheet for AWS Elastic Beanstalk Rails 6 Setup
   7) Setup SSH to connect to RDS instance from your terminal to migrate and seed database using your new eb instance
   
 Deploying a rails app to AWS can be tricky, especially if this is your first time. To start, you are going to need to ensure that your local ruby version is up to date with the most current version of the platform that AWS offers on the Elastic Beanstalk console. This is an important step that can be easy to mess up, so follow closely. 
-  From your terminal, in the root of your app directory, run:
+  In the root of your app directory, run: </br>
   $ ruby -v
   this will check the Ruby version you are running, the output will be similar to: 'ruby 2.7.4p191 (2021-07-07 revision a21a3b7d23) [arm64-darwin20]'
   It is important to note the trailing text after your initial version
