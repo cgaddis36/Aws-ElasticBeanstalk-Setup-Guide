@@ -15,9 +15,13 @@ Deploying a rails app to AWS can be tricky, especially if this is your first tim
 </br>
 To start, you are going to need to ensure that you have a User created in the IAM manager of your AWS account and it has the proper permissions setup. 
 </br>
+
+# Setup AWS User
 Go ahead and create an AWS account if you have not already.
 </br>
-Click on the Services Navigation tab at the top and search for IAM. Select this Service
+Once logged in and on The main AWS Console, Click on the Services Navigation tab at the top and search for 'IAM' 
+</br>
+Select this Service
 </br>
 Once on the IAM manager page, select Users.
 </br>
@@ -29,9 +33,11 @@ check the box that says "Access key - Programmatic access"
 </br>
 This will create an access key ID and a Secret Access key for you to use to login to AWS using your local machine
 <br/>
+Click 'Next:Permissions'
+<br/>
 On the Next Page, it will ask you to add tags.
 <br/>
-Go ahead and add a tag so you can recognize it later, Name:your-username
+Go ahead and add a tag so you can recognize this user later, Name:your-username
 </br>
 Click Download .csv
 </br>
