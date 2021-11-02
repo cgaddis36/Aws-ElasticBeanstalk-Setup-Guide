@@ -72,7 +72,7 @@ This is an important step that can be easy to mess up, so follow closely.
   
 This will set up a new environment with  
 
-#SSH Setup And Shell Commands
+# SSH Setup And Shell Commands
 Follow these steps to setup an elastic beanstalk environment connected to an AWS RDS Database 
 </br>
 Review how to run shell commands such as dropping, creating, migrating or seeding your database 
@@ -99,4 +99,13 @@ Review how to run shell commands such as dropping, creating, migrating or seedin
         profile: eb-cli
         sc: git
         workspace_type: Application
+        
+        
+        </br>
+# SSH Instance Commands 
+$ eb create your-env-name --envvars RAILS_MASTER_KEY=your-master-key,RAILS_ENV=production,DATABASE_URL=postgresql://your-db-username:your-db-password@your-database-instance-url:port/db-name
+</br>
+$ RAILS_ENV=production RAILS_MASTER_KEY=your-master-key DATABASE_URL=postgresql://your-db-username:db-password@db-instance-url:db-port/db-name bundle exec rails c
+ </br>
+ $ RAILS_ENV=production  RAILS_MASTER_KEY=your-master-key DATABASE_URL=postgresql://your-db-username:db-password@db-instance-url:db-port/db-name DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rails db:{drop,create,migrate,seed}
 
