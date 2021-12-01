@@ -76,36 +76,71 @@ This will set up a new environment with
 Follow these steps to setup an elastic beanstalk environment connected to an AWS RDS Database 
 </br>
 Review how to run shell commands such as dropping, creating, migrating or seeding your database 
-  - $ eb init 
+</br>
+  - $ eb init
     - Check that the environment you are wanting to connect to is listed in your .elasticbeanstalk/config.yml file, like so:
-      branch-defaults:
-        aws:
-          environment: your-environment-name
-        your-branch-name:
-          environment: your-environment-name
-      environment-defaults:
-        your-environment-name:
-          branch: null
-          repository: null
-      global:
-        application_name: your-rails-app-name
-        default_ec2_keyname: aws-eb
-        default_platform: Ruby 2.7 running on 64bit Amazon Linux 2 (or whichever platform you chose when setting up your App on Elasticbeanstalk)
-        default_region: us-east-1 (region you choose in app setup)
-        include_git_submodules: true
-        instance_profile: null
-        platform_name: null
-        platform_version: null
-        profile: eb-cli
-        sc: git
+    </br>
+      branch-defaults: </br>
+        aws: </br>
+          environment: your-environment-name </br>
+        your-branch-name: </br>
+          environment: your-environment-name </br>
+      environment-defaults: </br>
+        your-environment-name: </br>
+          branch: null </br>
+          repository: null </br>
+      global: </br>
+        application_name: your-rails-app-name </br>
+        default_ec2_keyname: aws-eb </br>
+        default_platform: Ruby 2.7 running on 64bit Amazon Linux 2 (or whichever platform you chose when setting up your App on Elasticbeanstalk) </br>
+        default_region: us-east-1 (region you choose in app setup) </br>
+        include_git_submodules: true </br>
+        instance_profile: null </br>
+        platform_name: null </br>
+        platform_version: null </br>
+        profile: eb-cli </br>
+        sc: git </br>
         workspace_type: Application
         
         
         </br>
+ Rails database.yml file config:</br>
+ At the bottom of your file you should have the following configuration to ensure your elasticbeanstalk environment knows where to pass the database_url environment variable from your commmand line </br>
+production: </br>
+  <<: *default </br>
+  adapter: postgresql </br>
+  encoding: unicode </br>
+  database: <%= ENV['RDS_DB_NAME'] %> </br>
+  username: <%= ENV['RDS_USERNAME'] %> </br>
+  password: <%= ENV['RDS_PASSWORD'] %> </br>
+  host: <%= ENV['RDS_HOSTNAME'] %> </br>
+  port: <%= ENV['RDS_PORT'] %> </br> </br>
+  
+  Rails Example Puma.rb ffile for production: </br> </br>
+
+max_threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 } </br>
+min_threads_count = ENV.fetch("RAILS_MIN_THREADS") { max_threads_count } </br>
+threads min_threads_count, max_threads_count </br> </br>
+
+worker_timeout 3600 if ENV.fetch("RAILS_ENV", "development") == "development" </br> </br>
+
+port ENV.fetch("PORT") { 3000 } </br> </br>
+
+environment ENV.fetch("RAILS_ENV") { "development" } </br> </br>
+
+pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" } </br>
+bind "unix:///var/run/puma/my_app.sock" </br> 
+(Comment out the above two lines while in development)  </br> </br>
+
+pidfile "/var/run/puma/my_app.sock" </br> </br>
+
+plugin :tmp_restart </br> </br>
+
 # SSH Instance Commands 
-$ eb create your-env-name --envvars RAILS_MASTER_KEY=your-master-key,RAILS_ENV=production,DATABASE_URL=postgresql://your-db-username:your-db-password@your-database-instance-url:port/db-name
 </br>
+$ eb create your-env-name --envvars RAILS_MASTER_KEY=your-master-key,RAILS_ENV=production,DATABASE_URL=postgresql://your-db-username:your-db-password@your-database-instance-url:port/db-name
+</br> </br>
 $ RAILS_ENV=production RAILS_MASTER_KEY=your-master-key DATABASE_URL=postgresql://your-db-username:db-password@db-instance-url:db-port/db-name bundle exec rails c
- </br>
- $ RAILS_ENV=production  RAILS_MASTER_KEY=your-master-key DATABASE_URL=postgresql://your-db-username:db-password@db-instance-url:db-port/db-name DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rails db:{drop,create,migrate,seed}
+ </br> </br>
+ $ RAILS_ENV=production  RAILS_MASTER_KEY=your-master-key DATABASE_URL=postgresql://your-db-username:db-password@db-instance-url:db-port/db-name DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rails db:{drop,create,migrate,seed} </br> </br>
 
