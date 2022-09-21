@@ -70,7 +70,9 @@ This is an important step that can be easy to mess up, so follow closely.
   - select Web server Environment 
   - on the next Screen Enter an application name, I named mine: 'SampleApp'
   
-This will set up a new environment with  
+This will set up a new environment with ruby selected as your platform. 
+
+Pay close attention to the version and puma version that is required for current AWS Elastic beanstalk deploys. You must have the most up-to-date version of both ruby & puma in your gemfile that is listed on this page: https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html#platforms-supported.ruby
 
 # SSH Setup And Shell Commands
 Follow these steps to setup an elastic beanstalk environment connected to an AWS RDS Database 
