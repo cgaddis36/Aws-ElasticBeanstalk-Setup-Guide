@@ -146,3 +146,12 @@ $ RAILS_ENV=production RAILS_MASTER_KEY=your-master-key DATABASE_URL=postgresql:
  </br> </br>
  $ RAILS_ENV=production  RAILS_MASTER_KEY=your-master-key DATABASE_URL=postgresql://your-db-username:db-password@db-instance-url:db-port/db-name DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rails db:{drop,create,migrate,seed} </br> </br>
 
+
+# Rails 7 AWS Elastic Beanstalk Deploy Guidelines
+
+## Step 1
+- Check current ruby platforms that AWS is accepting for new builds
+
+## Step 2
+- Set your rbenv or rvm to use the most current version of ruby that AWS is accepting, currently this is 3.0.4 
+run `rbenv local 3.0.4`
