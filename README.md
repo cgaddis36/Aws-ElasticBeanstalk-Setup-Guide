@@ -139,15 +139,15 @@ pidfile "/var/run/puma/my_app.sock" </br> </br>
 plugin :tmp_restart </br> </br>
 
 # AWS CLI commands
-
 </br>
+
+$ eb create your-env-name --envvars RAILS_MASTER_KEY=your-master-key,RAILS_ENV=production,DATABASE_URL=postgresql://your-db-username:your-db-password@your-database-instance-url:port/db-name
+</br> </br>
 # SSH Instance Commands 
 </br>
 Cd into current EC2 application instance
 </br>
 $ cd /var/app/current
-</br> </br>
-$ eb create your-env-name --envvars RAILS_MASTER_KEY=your-master-key,RAILS_ENV=production,DATABASE_URL=postgresql://your-db-username:your-db-password@your-database-instance-url:port/db-name
 </br> </br>
 $ RAILS_ENV=production RAILS_MASTER_KEY=your-master-key DATABASE_URL=postgresql://your-db-username:db-password@db-instance-url:db-port/db-name bundle exec rails c
  </br> </br>
